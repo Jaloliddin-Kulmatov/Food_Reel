@@ -24,7 +24,7 @@ Food Reels is a mobile-first web application that revolutionizes the food discov
 - [사용 기술 / Built With](#사용-기술--built-with)  
 - [시작하기 / Getting Started](#시작하기--getting-started)  
   - [사전 준비 / Prerequisites](#사전-준비--prerequisites)  
-  - [설치 및 설정 / Installation--setup)  
+  - [설치 및 설정 / Installation & Setup](#설치-및-설정--installation--setup)  
 - [사용 방법 / Usage](#사용-방법--usage)  
 
 ---
@@ -90,8 +90,9 @@ Food Reels is a mobile-first web application that revolutionizes the food discov
 - **🇰🇷** Node.js와 Firebase CLI가 필요합니다.  
 - **🇺🇸** You need Node.js and Firebase CLI installed.  
 
-## 설치 및 설정 / Installation & Setup
+### 설치 및 설정 / Installation & Setup
 
+```sh
 # Clone repository
 git clone https://github.com/your-username/food-reels.git
 cd food-reels
@@ -118,5 +119,5 @@ firebase deploy
 # Default database: (default) in region asia-east1
 
 ## 저자 / Author
-Jaloliddin Kulmatov and Abdumalik Aliev
+Jaloliddin Kulmatov and Abdumalik Aliev  
 🇰🇷 잘롤딘 쿨마트프 & 압두말릭 알리예프
