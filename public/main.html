@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Reels - Main</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./app-styles.css">
+</head>
+<body class="bg-gray-50 flex justify-center items-center min-h-screen py-12">
+
+    <div class="floating-animation relative">
+        <div class="phone-mockup w-[320px] h-[640px] rounded-[3rem] p-3 relative">
+            <div class="phone-screen w-full h-full rounded-[2.5rem] overflow-hidden relative">
+                <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-black rounded-b-2xl z-10"></div>
+                <div class="w-full h-full bg-white overflow-hidden flex flex-col relative">
+                    
+                    <div id="main-page-content" class="w-full h-full flex flex-col">
+                        <header class="flex items-center justify-between p-4 pt-8 bg-white z-10">
+                            <h1 class="text-2xl font-bold text-green-600">Food Reel</h1>
+                            <div class="flex items-center gap-4">
+                                <button id="open-search-btn">
+                                    <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                                </button>
+                                <a href="/profile.html">
+                                    <img src="/main-media/profileimg.jpg" alt="Profile" class="w-8 h-8 rounded-full object-cover" />
+                                </a>
+                            </div>
+                        </header>
+
+                        <nav class="px-4 mb-4">
+                            <div class="flex gap-4 overflow-x-auto pb-2">
+                                <div class="flex flex-col items-center min-w-[70px] food-category-item"><div class="w-16 h-16 rounded-full border-2 border-green-500 p-1 mb-2"><img src="/main-media/fooda.jpg" alt="전주떡갈비" class="w-full h-full rounded-full object-cover"/></div><span class="text-xs text-gray-700 text-center leading-tight">전주떡갈비</span></div>
+                                <div class="flex flex-col items-center min-w-[70px] food-category-item"><div class="w-16 h-16 rounded-full border-2 border-green-500 p-1 mb-2"><img src="/main-media/foodb.jpg" alt="한옥순대국" class="w-full h-full rounded-full object-cover"/></div><span class="text-xs text-gray-700 text-center leading-tight">한옥순대국</span></div>
+                                <div class="flex flex-col items-center min-w-[70px] food-category-item"><div class="w-16 h-16 rounded-full border-2 border-green-500 p-1 mb-2"><img src="/main-media/foodc.jpg" alt="청춘불고기" class="w-full h-full rounded-full object-cover"/></div><span class="text-xs text-gray-700 text-center leading-tight">청춘불고기</span></div>
+                                <div class="flex flex-col items-center min-w-[70px] food-category-item"><div class="w-16 h-16 rounded-full border-2 border-green-500 p-1 mb-2"><img src="/main-media/foodd.jpg" alt="전주" class="w-full h-full rounded-full object-cover"/></div><span class="text-xs text-gray-700 text-center leading-tight">전주</span></div>
+                                <div class="flex flex-col items-center min-w-[70px] food-category-item"><div class="w-16 h-16 rounded-full border-2 border-green-500 p-1 mb-2"><img src="/main-media/foode.jpg" alt="할머니" class="w-full h-full rounded-full object-cover"/></div><span class="text-xs text-gray-700 text-center leading-tight">할머니</span></div>
+                            </div>
+                        </nav>
+
+                        <main id="posts-container" class="flex-1 bg-gray-50 rounded-t-3xl overflow-y-auto"></main>
+
+                        <footer class="bg-white border-t border-gray-200 px-4 py-2 flex items-center justify-around">
+                            <a href="/main.html" class="flex flex-col items-center py-1 text-orange-500"><div class="bg-orange-500 rounded-2xl px-4 py-2"><p class="text-white text-sm">메인</p></div></a>
+                            <a href="/reels.html" class="flex flex-col items-center py-1 text-gray-400"><p>릴스</p></a>
+                            <a href="/profile.html" class="flex flex-col items-center py-1 text-gray-400"><p>마이페이지</p></a>
+                        </footer>
+                    </div>
+
+                    <div id="search-overlay" class="absolute inset-0 bg-white z-20 flex-col hidden">
+                        </div>
+
+                </div>
+                <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-white/30 rounded-full"></div>
+            </div>
+        </div>
+        <div class="absolute inset-0 rounded-[3rem] bg-gradient-to-br from-white/10 via-transparent to-transparent pointer-events-none"></div>
+    </div>
+
+    <div id="modal-container"></div>
+
+    <script src="/__/firebase/12.3.0/firebase-app-compat.js"></script>
+    <script src="/__/firebase/12.3.0/firebase-auth-compat.js"></script>
+    <script src="/__/firebase/init.js"></script>
+    <script src="./app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const postsData = [
+                { id: 1, restaurantName: "대박갈비집", location: "전주시 덕진구", restaurantImage: "/main-media/foodf.jpg", postImage: "/main-media/foodg.jpg", price: 7999, description: "한우 갈비구이 세트 - 김치찌개와 밑반찬 포함" },
+                { id: 2, restaurantName: "청춘불고기", location: "전주시 완산구", restaurantImage: "/main-media/foodc.jpg", postImage: "/main-media/foodd.jpg", price: 12000, description: "달콤한 불고기의 매력에 빠져보세요" },
+                { id: 3, restaurantName: "한옥순대국", location: "전주시 한옥마을", restaurantImage: "/main-media/foodb.jpg", postImage: "/main-media/foode.jpg", price: 13000, description: "진한 사골 국물의 깊은 맛" },
+                { id: 4, restaurantName: "전주떡갈비", location: "전주시 중앙동", restaurantImage: "/main-media/fooda.jpg", postImage: "/main-media/fooda.jpg", price: 9000, description: "육즙 가득한 전통 떡갈비" },
+                { id: 5, restaurantName: "할머니 손맛", location: "전주시 평화동", restaurantImage: "/main-media/food.jpg", postImage: "/main-media/food.jpg", price: 10000, description: "할머니가 해주신 집밥 그대로" }
+            ];
+            const addOnsData = [ { name: "김치찌개", price: 3000 }, { name: "소주 (참이슬)", price: 1900 }, { name: "공기밥 추가", price: 1200 }];
+
+            const postsContainer = document.getElementById('posts-container');
+            const modalContainer = document.getElementById('modal-container');
+            
+            function renderPosts(postsToRender) {
+                postsContainer.innerHTML = '';
+                postsToRender.forEach(post => {
+                    const postHTML = `
+                        <div class="mb-4">
+                            <div class="bg-white p-4 flex items-center justify-between"><div class="flex items-center gap-3"><div class="w-12 h-12 rounded-full overflow-hidden"><img src="${post.restaurantImage}" alt="Restaurant" class="w-full h-full object-cover" /></div><div><h3 class="font-semibold text-gray-900">${post.restaurantName}</h3><p class="text-sm text-gray-600">${post.location}</p></div></div></div>
+                            <div class="relative"><img src="${post.postImage}" alt="${post.description}" class="w-full h-72 object-cover" /></div>
+                            <div class="bg-white p-4">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-2xl font-bold text-green-600">₩${post.price}</span>
+                                    <button class="order-btn bg-orange-500 text-white py-2 px-5 rounded-full font-bold text-sm shadow-md hover:bg-orange-600 transition-colors" data-post-id="${post.id}">주문하기</button>
+                                </div>
+                                <p class="text-gray-800 text-sm leading-relaxed">${post.description}</p>
+                            </div>
+                        </div>`;
+                    postsContainer.innerHTML += postHTML;
+                });
+            }
+
+            function openOrderModal(post) {
+                let quantity = 1;
+                let selectedAddOns = [];
+                modalContainer.innerHTML = `<div class="modal-overlay open fixed inset-0 bg-black/50 z-50 flex items-end"><div class="modal-content bg-white w-full rounded-t-3xl max-h-[85%] overflow-y-auto"><div class="flex items-center justify-between p-4 border-b border-gray-200 sticky top-0 bg-white"><h2 class="text-xl font-bold">주문하기</h2><button class="close-modal-btn">&times;</button></div><div class="p-4"><div class="flex items-center gap-4 mb-6"><div class="w-20 h-20 rounded-2xl overflow-hidden"><img src="${post.postImage}" class="w-full h-full object-cover"/></div><div class="flex-1"><h3 class="text-lg font-bold">${post.restaurantName}</h3><p class="text-gray-600">${post.location}</p><p class="text-xl font-bold text-green-600">₩${post.price}</p></div></div><div class="mb-6"><h4 class="font-semibold mb-3">수량</h4><div class="flex items-center justify-center gap-4"><button id="decrease-qty" class="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center">-</button><span id="quantity" class="text-2xl font-bold w-8 text-center">${quantity}</span><button id="increase-qty" class="w-12 h-12 rounded-full bg-orange-500 text-white flex items-center justify-center">+</button></div></div><div class="mb-6"><h4 class="font-semibold mb-3">추가 옵션</h4><div class="space-y-3">${addOnsData.map(addon => `<div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg"><div class="flex items-center gap-3"><input type="checkbox" data-name="${addon.name}" data-price="${addon.price}" class="addon-checkbox w-5 h-5 text-green-600 rounded"/><span>${addon.name}</span></div><span class="text-gray-600">+₩${addon.price}</span></div>`).join('')}</div></div><div class="mb-6"><h4 class="font-semibold mb-3">결제 방법</h4><div class="space-y-3">${["카카오페이", "신용카드", "네이버페이"].map((m, i) => `<div class="flex items-center p-3 border border-gray-200 rounded-lg"><input type="radio" name="payment" ${i===0 ? 'checked' : ''} class="w-5 h-5 text-green-600"/><span class="ml-3">${m}</span></div>`).join('')}</div></div><div class="flex items-center justify-between mb-6 p-4 bg-gray-50 rounded-lg"><span class="text-lg font-bold">총 결제 금액</span><span id="total-price" class="text-2xl font-bold text-green-600"></span></div><button id="final-order-btn" class="w-full bg-orange-500 text-white py-4 rounded-2xl font-bold text-lg">주문하기</button></div></div></div>`;
+                
+                const modalOverlay = modalContainer.querySelector('.modal-overlay');
+                const updateTotalPrice = () => {
+                    const addOnsPrice = selectedAddOns.reduce((total, addon) => total + addon.price, 0);
+                    const total = (post.price + addOnsPrice) * quantity;
+                    modalOverlay.querySelector('#total-price').textContent = `₩${total}`;
+                };
+                modalOverlay.addEventListener('click', e => {
+                    if (e.target.classList.contains('close-modal-btn') || e.target === modalOverlay) modalContainer.innerHTML = '';
+                    if (e.target.id === 'decrease-qty') { if (quantity > 1) quantity--; modalOverlay.querySelector('#quantity').textContent = quantity; updateTotalPrice(); }
+                    if (e.target.id === 'increase-qty') { quantity++; modalOverlay.querySelector('#quantity').textContent = quantity; updateTotalPrice(); }
+                    if (e.target.classList.contains('addon-checkbox')) {
+                        const { name, price } = e.target.dataset;
+                        if (e.target.checked) selectedAddOns.push({ name, price: parseInt(price) });
+                        else selectedAddOns = selectedAddOns.filter(a => a.name !== name);
+                        updateTotalPrice();
+                    }
+                    if (e.target.id === 'final-order-btn') {
+                        modalContainer.innerHTML = '';
+                        showOrderSuccess();
+                    }
+                });
+                updateTotalPrice();
+            }
+            
+            function showOrderSuccess() {
+                const successEl = document.createElement('div');
+                successEl.className = 'fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50';
+                successEl.innerHTML = `<div class="success-popup bg-white rounded-2xl p-8 text-center max-w-sm w-full"><div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"><svg class="w-8 h-8 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg></div><h3 class="text-xl font-bold mb-2">주문 성공!</h3><p class="text-gray-600">주문이 접수되었습니다.</p></div>`;
+                modalContainer.appendChild(successEl);
+                setTimeout(() => modalContainer.innerHTML = '', 3000);
+            }
+            
+            postsContainer.addEventListener('click', (e) => {
+                const orderBtn = e.target.closest('.order-btn');
+                if (orderBtn) {
+                    const postId = parseInt(orderBtn.dataset.postId);
+                    const post = postsData.find(p => p.id === postId);
+                    if (post) openOrderModal(post);
+                }
+            });
+
+            // --- START: NEW JAVASCRIPT FOR SEARCH FUNCTIONALITY ---
+
+            const openSearchBtn = document.getElementById('open-search-btn');
+            const searchOverlay = document.getElementById('search-overlay');
+            const mainPageContent = document.getElementById('main-page-content');
+
+            // State for search feature
+            let recentSearches = JSON.parse(localStorage.getItem('foodReelsRecentSearches')) || ["갈비구이", "김치찌개", "불고기", "비빔밥"];
+            let showFilters = false;
+            const filterCategories = ["채식", "비건", "글루텐프리", "케토", "매운맛", "무설탕", "다이어트", "저칼로리", "한식", "중식", "일식", "양식"];
+
+            function saveRecentSearches() {
+                localStorage.setItem('foodReelsRecentSearches', JSON.stringify(recentSearches));
+            }
+
+            function renderSearchOverlay(query = '', searchResults = null) {
+                // Determine what content to show: recent searches, results, or no results message
+                let contentHtml = '';
+                if (searchResults) {
+                    if (searchResults.length > 0) {
+                        contentHtml = `
+                            <h3 class="text-lg font-semibold mb-4">검색 결과</h3>
+                            <div class="space-y-4">
+                                ${searchResults.map(post => `
+                                    <div class="flex items-center gap-4 p-2 rounded-lg hover:bg-gray-50">
+                                        <img src="${post.postImage}" alt="${post.restaurantName}" class="w-16 h-16 object-cover rounded-md" />
+                                        <div>
+                                            <p class="font-semibold">${post.restaurantName}</p>
+                                            <p class="text-sm text-gray-600">${post.description}</p>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>`;
+                    } else {
+                        contentHtml = `<p class="text-gray-500 text-center mt-8">검색 결과가 없습니다.</p>`;
+                    }
+                } else {
+                    contentHtml = `
+                        <h3 class="text-lg font-semibold mb-4">최근 검색</h3>
+                        <div class="space-y-3">
+                            ${recentSearches.map((term, index) => `
+                                <div class="flex items-center justify-between">
+                                    <button class="flex-1 text-left text-gray-700 py-1 recent-search-term" data-term="${term}">${term}</button>
+                                    <button class="text-gray-400 hover:text-gray-600 p-1 delete-search-term" data-index="${index}">
+                                        <svg class="w-4 h-4 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    </button>
+                                </div>
+                            `).join('')}
+                        </div>`;
+                }
+
+                // Main structure of the search overlay
+                searchOverlay.innerHTML = `
+                    <div class="flex items-center p-4 pt-8 border-b border-gray-200">
+                        <button id="close-search-btn" class="mr-3">
+                            <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                        </button>
+                        <div class="flex-1 flex items-center bg-gray-100 rounded-lg px-3 py-2">
+                            <svg class="w-5 h-5 text-gray-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                            <input type="text" id="search-input" placeholder="음식, 레스토랑 검색" value="${query}" class="flex-1 bg-transparent outline-none text-gray-700" autofocus />
+                        </div>
+                        <button id="toggle-filter-btn" class="ml-3 p-2 rounded-lg transition-colors ${showFilters ? 'bg-orange-500' : 'bg-gray-200'}">
+                            <svg class="w-5 h-5 ${showFilters ? 'text-white' : 'text-gray-600'}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-.293.707L16 11.414V16a1 1 0 01-.293.707l-2 2A1 1 0 0113 18v-1.586l-4-4V7.414L4.293 6.707A1 1 0 014 6V4z"></path></svg>
+                        </button>
+                    </div>
+                    <div class="flex-1 overflow-y-auto">
+                        ${showFilters ? `
+                            <div class="p-4 border-b border-gray-200">
+                                <div class="grid grid-cols-3 sm:grid-cols-4 gap-3">
+                                    ${filterCategories.map(cat => `<button class="py-2 px-3 rounded-full text-sm font-medium border bg-white text-gray-700 border-gray-300">${cat}</button>`).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+                        <div class="p-4">${contentHtml}</div>
+                    </div>`;
+                
+                // Set focus back to input after re-render
+                searchOverlay.querySelector('#search-input').focus();
+            }
+
+            function openSearch() {
+                mainPageContent.classList.add('hidden');
+                searchOverlay.classList.remove('hidden');
+                searchOverlay.classList.add('flex');
+                renderSearchOverlay();
+            }
+
+            function closeSearch() {
+                searchOverlay.classList.add('hidden');
+                searchOverlay.classList.remove('flex');
+                mainPageContent.classList.remove('hidden');
+            }
+
+            openSearchBtn.addEventListener('click', openSearch);
+
+            searchOverlay.addEventListener('click', (e) => {
+                if (e.target.closest('#close-search-btn')) {
+                    closeSearch();
+                }
+                if (e.target.closest('#toggle-filter-btn')) {
+                    showFilters = !showFilters;
+                    const searchInput = searchOverlay.querySelector('#search-input');
+                    renderSearchOverlay(searchInput.value);
+                }
+                if (e.target.classList.contains('delete-search-term')) {
+                    const index = parseInt(e.target.dataset.index, 10);
+                    recentSearches.splice(index, 1);
+                    saveRecentSearches();
+                    renderSearchOverlay();
+                }
+                if (e.target.classList.contains('recent-search-term')) {
+                    const term = e.target.dataset.term;
+                    const searchInput = searchOverlay.querySelector('#search-input');
+                    searchInput.value = term;
+                    // Trigger input event to perform search
+                    searchInput.dispatchEvent(new Event('input', { bubbles: true }));
+                }
+            });
+
+            searchOverlay.addEventListener('input', (e) => {
+                if (e.target.id === 'search-input') {
+                    const query = e.target.value.trim().toLowerCase();
+                    if (query) {
+                        const results = postsData.filter(post =>
+                            post.restaurantName.toLowerCase().includes(query) ||
+                            post.description.toLowerCase().includes(query)
+                        );
+                        renderSearchOverlay(e.target.value, results);
+                    } else {
+                        renderSearchOverlay('', null);
+                    }
+                }
+            });
+
+            searchOverlay.addEventListener('keydown', (e) => {
+                if (e.target.id === 'search-input' && e.key === 'Enter') {
+                    const query = e.target.value.trim();
+                    if (query) {
+                        recentSearches = [query, ...recentSearches.filter(s => s.toLowerCase() !== query.toLowerCase())].slice(0, 5);
+                        saveRecentSearches();
+                        // No re-render needed here as the live search already shows results
+                    }
+                }
+            });
+            
+            // --- END: NEW JAVASCRIPT FOR SEARCH FUNCTIONALITY ---
+
+            renderPosts(postsData);
+        });
+    </script>
+</body>
+</html> 
