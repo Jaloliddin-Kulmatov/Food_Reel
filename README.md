@@ -90,7 +90,33 @@ Food Reels is a mobile-first web application that revolutionizes the food discov
 - **🇰🇷** Node.js와 Firebase CLI가 필요합니다.  
 - **🇺🇸** You need Node.js and Firebase CLI installed.  
 
-- Node.js: [https://nodejs.org/](https://nodejs.org/)  
-- Firebase CLI:  
-  ```sh
-  npm install -g firebase-tools
+## 설치 및 설정 / Installation & Setup
+
+# Clone repository
+git clone https://github.com/your-username/food-reels.git
+cd food-reels
+
+# Install dependencies
+npm install
+
+# Firebase setup
+npm install -g firebase-tools
+firebase login
+firebase init
+
+# Run locally
+firebase serve
+# or
+firebase emulators:start
+
+# Deploy
+firebase deploy
+
+# Security
+# Firestore rules: firestore.rules
+# Storage rules: storage.rules
+# Default database: (default) in region asia-east1
+
+## 저자 / Author
+Jaloliddin Kulmatov and Abdumalik Aliev
+🇰🇷 잘롤딘 쿨마트프 & 압두말릭 알리예프
