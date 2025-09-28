@@ -1,99 +1,85 @@
-# Food Reels 🍽️📱  
-**See it. Crave it. Order it.**
+# 🇰🇷 Korean  
 
-Food Reels is a mobile-first web application that revolutionizes the food discovery and ordering experience by merging an engaging, short-form video feed with a seamless, integrated ordering system.
+**보고, 즐기고, 주문하세요.**  
+
+Food Reels는 사용자가 음식 영상을 보고 즉시 주문까지 할 수 있는, 모바일 중심의 혁신적인 웹 애플리케이션입니다. 매력적인 숏폼 비디오 피드와 편리한 주문 시스템을 결합하여, 음식 콘텐츠와 소비 경험 사이의 간극을 해결합니다.  
+
+이 프로젝트는 해커톤을 위해 모든 핵심 기능이 구현된 프로토타입으로 개발되었습니다.  
 <img width="1415" height="813" alt="Screenshot 2025-09-28 at 9 55 24 AM" src="https://github.com/user-attachments/assets/670c3590-572f-4b59-a2f0-2f9b56278408" />
 
-
-This project was developed as a fully functional prototype for a hackathon.  
-
-![Screenshot](./assets/screenshot.png)
+*(팁: 앱 사용 모습을 짧은 GIF로 녹화하여 위 플레이스홀더 링크를 교체하세요.)*  
 
 ---
 
-## 📑 Table of Contents
-- [About The Project](#about-the-project)
-  - [The Problem](#the-problem)
-  - [Our Solution](#our-solution)
-- [Key Features](#key-features)
-- [Built With](#built-with)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation & Setup](#installation--setup)
-- [Usage](#usage)
+## 📑 목차  
+
+- [프로젝트 소개](#프로젝트-소개)  
+  - [문제점](#문제점)  
+  - [우리의 해결책](#우리의-해결책)  
+- [주요 기능](#주요-기능)  
+- [사용 기술](#사용-기술)  
+- [시작하기](#시작하기)  
+  - [사전 준비](#사전-준비)  
+  - [설치 및 설정](#설치-및-설정)  
+- [사용 방법](#사용-방법)  
 
 ---
 
-## 🚀 About The Project
+## 프로젝트 소개  
 
-### The Problem  
-The current digital food landscape is disconnected. Users discover exciting food on video platforms like TikTok but face a frustrating gap when they want to order.  
+### 문제점  
+현재의 음식 주문 시장은 단절되어 있습니다. 사용자들은 틱톡과 같은 비디오 플랫폼에서 멋진 음식 콘텐츠를 발견하지만, 막상 주문하려면 앱을 종료하고 다시 검색해야 하는 불편함을 겪습니다.  
 
-At the same time, traditional delivery apps are uninspiring, presenting static menus that fail to capture the true appeal of a dish.  
+동시에, 기존의 배달 앱들은 정적인 메뉴판에 의존하여 음식의 진정한 매력을 전달하지 못합니다.  
 
-Furthermore, this system creates a massive barrier for new restaurants, which struggle to gain visibility on review-based platforms without an existing customer base.
+또한, 이러한 시스템은 신규 음식점들에게 높은 진입 장벽으로 작용합니다. 기존 고객 기반 없이는 리뷰를 얻기 어렵고, 리뷰 없이는 플랫폼에서 노출되기 어렵기 때문입니다.  
 
-### Our Solution  
-Food Reels bridges this gap by creating a **"Watch-to-Table"** experience.  
+### 우리의 해결책  
+Food Reels는 **"Watch-to-Table(영상에서 식탁까지)"** 경험을 제공하여 이러한 문제를 해결합니다.  
 
-We provide users with an immersive, entertaining video feed to discover local cuisine and allow them to order directly from the content that inspires them.  
+우리는 사용자에게 몰입감 넘치는 비디오 피드를 통해 지역 맛집을 발견하는 즐거움을 제공하고, 그 콘텐츠에서 바로 주문까지 할 수 있도록 합니다.  
 
-For restaurants, we offer a **merit-based platform** where success is driven by creating engaging content — not by pre-existing review volume. This gives new, high-quality restaurants a fair chance to attract customers and grow their business.
-
----
-
-## ✨ Key Features
-- **Dynamic Main Feed**  
-  A scrollable feed of posts from local restaurants with story-like categories for quick browsing.  
-
-- **Immersive Reels Feed**  
-  A full-screen, vertical, swipeable video feed powered by the **Intersection Observer API** for efficient video playback.  
-
-- **Interactive Ordering**  
-  A reusable modal that allows users to:  
-  - Adjust the quantity of the main dish  
-  - Add side dishes with **individual quantity controls**  
-  - See the total price update in **real-time**  
-  - Select a payment method and place an order  
-
-- **Functional Search Page**  
-  A slide-in search interface with live filtering, recent search history, and clickable filter categories.  
-
-- **Comprehensive User Profile**  
-  Manage everything in one place:  
-  - **Order History** (persisted using `localStorage`)  
-  - Payment Methods & Delivery Addresses  
-  - Reviews, Notifications, and Personal Settings  
-
-- **Firebase Integration**  
-  - Secure login/signup via **Firebase Authentication**  
-  - Hosting via **Firebase Hosting**  
+음식점에게는 기존의 리뷰 수에 얽매이지 않고, 오직 매력적인 콘텐츠를 통해 성공할 수 있는 공정한 기회의 장을 제공합니다.  
 
 ---
 
-## 🛠️ Built With
+## 주요 기능  
 
-This prototype was built with a focus on rapid development and core functionality, using fundamental web technologies.  
+- **다이나믹 메인 피드:** 지역 음식점들의 포스트를 스크롤하며 탐색 + 스토리 형식의 카테고리 탭 제공  
+- **몰입감 있는 릴스 피드:** **Intersection Observer API**를 활용한 효율적인 전체 화면 영상 재생  
+- **인터랙티브 주문 시스템:**  
+  - 메인 메뉴 수량 조절  
+  - 사이드 메뉴 **개별 수량 조절**  
+  - **실시간** 총 주문 금액 업데이트  
+  - 결제 수단 선택 & 주문 완료  
+- **지능형 검색 페이지:** 실시간 필터링, 최근 검색어, 카테고리 필터 제공  
+- **통합 사용자 프로필:**  
+  - **주문 내역** (`localStorage` 저장)  
+  - 결제 수단 & 배송지  
+  - 리뷰, 알림, 개인 설정 관리  
+- **Firebase 연동:** 안전한 로그인/회원가입 (**Firebase Authentication**)  
 
-**Frontend**
+---
+
+## 사용 기술  
+
+**프론트엔드:**  
 - HTML5  
-- CSS3 (with **Tailwind CSS via CDN**)  
+- CSS3 (**Tailwind CSS via CDN**)  
 - Vanilla JavaScript (ES6+)  
 
-**Backend & Services**
-- **Firebase Authentication** — secure user management  
-- **Firebase Hosting** — deployment & local development server  
+**백엔드 & 서비스:**  
+- **Firebase Authentication** — 사용자 관리  
+- **Firebase Hosting** — 배포 및 로컬 개발 서버  
 
 ---
 
-## ⚡ Getting Started
+## 시작하기  
 
-Follow these steps to set up the project locally.  
+로컬 환경에서 프로젝트를 실행하려면 다음 단계를 따르세요.  
 
-### Prerequisites
-You’ll need the following installed:  
-
-- **Node.js:** [Download here](https://nodejs.org/)  
-- **Firebase CLI:**  
+### 사전 준비  
+- [Node.js](https://nodejs.org/)  
+- Firebase CLI 설치:  
   ```sh
   npm install -g firebase-tools
